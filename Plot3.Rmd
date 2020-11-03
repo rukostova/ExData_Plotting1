@@ -1,0 +1,31 @@
+---
+title: "Plot3"
+author: "Rumyana Kostova"
+date: '3 11 2020 г '
+output: word_document
+---
+
+##Loading data
+
+```{r}
+household_power_consumption <- read.csv("D:/Rumy/Coursera/Project1/household_power_consumption.txt", sep=";", na.strings="?")
+Mydata<-subset(household_power_consumption,Date=="1/2/2007"| Date =="2/2/2007")
+
+```
+
+## Creating plot
+
+```{r}
+matplot(as.POSIXct(paste(Mydata$Date, Mydata$Time), format="%d/%m/%Y %H:%M:%S"), cbind(Mydata$Sub_metering_1,Mydata$Sub_metering_2,Mydata$Sub_metering_3),type="l",col=c("black","red","blue"),lty=c(1,1,1), xlab="Date-time", ylab="Energy sub metering")
+legend("topright",inset=0.02,legend=c("Sub_metering_1","Sub_metering_2","Sub_metering_3"),col=c("black","blue","red"), lty=1, cex=0.8, box.lty=0)
+
+```
+
+## Save as .png file
+
+```{r}
+dev.copy(png, file="Plot3.png", width = 480, height = 480)
+dev.off()
+
+```
+

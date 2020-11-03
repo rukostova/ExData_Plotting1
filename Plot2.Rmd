@@ -1,0 +1,28 @@
+---
+title: "Plot2"
+author: "Rumyana Kostova"
+date: '3 11 2020 г '
+output: word_document
+---
+
+##Loading data
+
+```{r}
+household_power_consumption <- read.csv("household_power_consumption.txt", sep=";", na.strings="?")
+Mydata<-subset(household_power_consumption,Date=="1/2/2007"| Date =="2/2/2007")
+```
+
+## Creating plot
+
+```{r}
+plot(as.POSIXct(paste(Mydata$Date, Mydata$Time), format="%d/%m/%Y %H:%M:%S"),Mydata$Global_active_power,type = "l", xlab="Datetime",ylab="Global active power (kilowattes)")
+```
+
+## Save as .png file
+
+```{r }
+dev.copy(png, file="Plot2.png", width = 480, height = 480)
+dev.off()
+```
+
+
